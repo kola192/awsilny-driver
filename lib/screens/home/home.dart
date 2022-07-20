@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
         ? const Loading()
         : Scaffold(
             appBar: AppBar(
-              title: const Text("لوحة التحكم"),
+              title: const Text("تطبيق أوصلني"),
               backgroundColor: AppColor.primaryColor,
               elevation: 0.0,
               actions: <Widget>[
@@ -73,8 +73,8 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/trips');
                           },
-                          icon: const Icon(Icons.person),
-                          label: const Text('الرحلات')),
+                          icon: const Icon(Icons.local_taxi),
+                          label: const Text('الحجوزات')),
                     ),
                   ),
                 ],

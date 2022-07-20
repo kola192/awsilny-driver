@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.awsilny.driver_app">
    <application
-        android:label="awsilny_driver"
+        android:label="awsilny-driver"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

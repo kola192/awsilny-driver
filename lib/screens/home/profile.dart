@@ -67,10 +67,10 @@ class _ProfilePageState extends State<ProfilePage> {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: const Card(
-                color: Colors.red,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 115.0),
-                child: ListTile(
+              child: Card(
+                color: Colors.grey[700],
+                margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 115.0),
+                child: const ListTile(
                   leading: Icon(
                     Icons.follow_the_signs,
                     color: Colors.white,
@@ -90,11 +90,13 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       bottomSheet: _showBottomSheet(),
       floatingActionButton: _showSheet ? null : FloatingActionButton(
+        backgroundColor: Colors.grey,
         onPressed: () {
           setState(() {
             _showSheet = true;
           });
         },
+        child: const Icon(Icons.edit),
       ),
     );
   }

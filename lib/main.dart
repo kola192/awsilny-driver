@@ -1,5 +1,5 @@
 import 'package:awsilny_driver/screens/home/profile.dart';
-import 'package:awsilny_driver/screens/home/trips.dart';
+import 'package:awsilny_driver/screens/home/orders/orders.dart';
 import 'package:awsilny_driver/shared/showSignIn.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const Wrapper(),
           '/profile': (context) => const ProfilePage(),
-          '/trips': (context) => const Trips(),
+          '/trips': (context) => const Orders(),
         },
         initialRoute: '/',
         // home: Wrapper(),
