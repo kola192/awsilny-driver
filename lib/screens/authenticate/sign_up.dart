@@ -220,16 +220,16 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                   ),
                 ),
               ),
-              Consumer<ShowSignIn>(builder: (context, showSignIn, child) {
-                return TextButton(
-                  onPressed: () {
-                    showSignIn.toggleShowSignIn();
-                  },
-                  child: const Text(
-                    "اذا كنت تملك حساب مسيقا إضغط ل 'تسجيل الدخول'",
-                  ),
-                );
-              }),
+              // Consumer<ShowSignIn>(builder: (context, showSignIn, child) {
+              //   return TextButton(
+              //     onPressed: () {
+              //       showSignIn.toggleShowSignIn();
+              //     },
+              //     child: const Text(
+              //       "اذا كنت تملك حساب مسيقا إضغط ل 'تسجيل الدخول'",
+              //     ),
+              //   );
+              // }),
             ],
           ),
         ),

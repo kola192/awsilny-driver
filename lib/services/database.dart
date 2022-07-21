@@ -21,11 +21,12 @@ class Database {
   }
 
   // update driver
-  void updateDriver(id, name, email, phone) async {
+  void updateDriver(id, name, email, phone, car) async {
     users.doc(id).set({
       'name': name,
       'email': email,
       'phone': phone,
+      'car': car,
       'role': 'driver'
     }).then((value) {
       print('driver updated');

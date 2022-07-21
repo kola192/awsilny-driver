@@ -1,7 +1,9 @@
 import 'package:awsilny_driver/screens/home/orders/singleOrder.dart';
 import 'package:awsilny_driver/shared/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OrdersList extends StatefulWidget {
   const OrdersList({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class _OrdersListState extends State<OrdersList> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User?>(context);
     return Scaffold(
       body: Container(
         color: Colors.blueGrey[50],
@@ -47,7 +50,8 @@ class _OrdersListState extends State<OrdersList> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SingleOrder(order: data.docs[index]),
+                                builder: (context) =>
+                                    SingleOrder(order: data.docs[index]),
                               ),
                             );
                           },
@@ -71,6 +75,7 @@ class _OrdersListState extends State<OrdersList> {
                                           ['arrivePlace'],
                                       'customerID': data.docs[index]
                                           ['customerID'],
+                                      'driverID': user?.uid,
                                       'price': data.docs[index]['price'],
                                       'status': 'accepted',
                                       'time': data.docs[index]['time'],

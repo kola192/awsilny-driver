@@ -120,6 +120,8 @@ class _ProfilePageState extends State<ProfilePage> {
     TextEditingController nameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController phoneController = TextEditingController();
+    TextEditingController carController = TextEditingController();
+
 
     Database database = Database();
 
@@ -245,6 +247,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                         }),
                                       ),
                                     ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 5,
+                                      ),
+                                      child: TextFormField(
+                                        controller: carController,
+                                        decoration: inputDecoration.copyWith(
+                                            labelText: 'نوع المركبة'),
+                                        validator: ((value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'جميع الحقول مطلوبة';
+                                          }
+                                          return null;
+                                        }),
+                                      ),
+                                    ),
                                   ],
                                 )),
                             const SizedBox(
@@ -275,7 +293,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   database.updateDriver(
-                                      data.docs[index].id, nameController.text, emailController.text, phoneController.text);
+                                      data.docs[index].id, nameController.text, emailController.text, phoneController.text,carController.text);
                                   _showSheet = false;
                                   setState(() {});
                                 }

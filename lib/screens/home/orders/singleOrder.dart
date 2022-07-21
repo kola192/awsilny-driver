@@ -77,6 +77,13 @@ class _SingleOrderState extends State<SingleOrder> {
                                 }),
                             InfoCard(
                                 text:
+                                    'هاتف صاحب الرحلة : ${data.docs[index]['phone']}',
+                                icon: Icons.person,
+                                onPressed: () {
+                                  print("this is your phone");
+                                }),
+                            InfoCard(
+                                text:
                                     ' نقطة الإنطلاق : ${widget.order['startPlace']}',
                                 icon: Icons.home,
                                 onPressed: () {
