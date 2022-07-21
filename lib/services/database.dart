@@ -19,4 +19,16 @@ class Database {
       print('driver added');
     }).catchError((err) => print(err.toString()));
   }
+
+  // update driver
+  void updateDriver(id, name, email, phone) async {
+    users.doc(id).set({
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'role': 'driver'
+    }).then((value) {
+      print('driver updated');
+    }).catchError((err) => print(err.toString()));
+  }
 }

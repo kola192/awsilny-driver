@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  static Color? primaryColor = Colors.pink;
+  static Color? primaryColor = Color.fromARGB(255, 24, 40, 85);
+  static Color? backgroundColor = Color.fromARGB(255, 183, 189, 206);
   static Color? lightColor = Colors.pink[50];
+  static Color? appBarColor = Color.fromARGB(255, 10, 17, 37);
   // static Color homePageBackground = const Color(0xFFfbfcff);
   // static Color gradientFirst = const Color(0xff0f17ad);
   // static Color gradientSecond = const Color(0xFF6985e8);

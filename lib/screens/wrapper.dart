@@ -1,4 +1,5 @@
 import 'package:awsilny_driver/screens/authenticate/authenticate.dart';
+import 'package:awsilny_driver/screens/home/home_screen.dart';
 import 'package:awsilny_driver/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class Wrapper extends StatelessWidget {
       if (currentUser == null) {
         return const Authenticate();
       }
-      return const HomePage();
+      return const HomeScreen();
     } else {
       return const Authenticate();
     }

@@ -1,6 +1,13 @@
 import 'package:awsilny_driver/services/auth.dart';
 import 'package:awsilny_driver/shared/loading.dart';
+import 'package:awsilny_driver/utils/current_location_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 import '../../shared/colors.dart';
 import '../../shared/constants.dart';
 
@@ -15,72 +22,61 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool loading = false;
-  void signOutFunction() async {
-    setState(() {
-      loading = true;
-    });
-    final res = await _auth.signOut();
-    print(res);
-  }
+  late final MapController mapController;
 
   @override
+  void initState() {
+    super.initState();
+    mapController = MapController();
+  }
+
   Widget build(BuildContext context) {
-    return loading
-        ? const Loading()
-        : Scaffold(
-            appBar: AppBar(
-              title: const Text("تطبيق أوصلني"),
-              backgroundColor: AppColor.primaryColor,
-              elevation: 0.0,
-              actions: <Widget>[
-                TextButton.icon(
-                  style: TextButton.styleFrom(
-                    primary: AppColor.lightColor,
-                  ),
-                  onPressed: signOutFunction,
-                  icon: const Icon(Icons.logout),
-                  label: Text('خروج',
-                      style: TextStyle(color: AppColor.lightColor)),
+    final user = Provider.of<User?>(context);
+    var location = [];
+    List<Placemark> startPlace;
+    List<Placemark> arrivePlace;
+    return FutureBuilder<LocationData?>(
+      future: currentLocation(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapchat) {
+        if (snapchat.hasData) {
+          final LocationData currentLocation = snapchat.data;
+          return Scaffold(
+            body: Stack(
+              children: [
+                FlutterMap(
+                  mapController: mapController,
+                  options: MapOptions(
+                      center: LatLng(currentLocation.latitude!,
+                          currentLocation.longitude!),
+                      zoom: 15),
+                  layers: [
+                    TileLayerOptions(
+                        urlTemplate:
+                            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        subdomains: ['a', 'b', 'c']),
+                    MarkerLayerOptions(
+                      markers: [
+                        Marker(
+                          width: 100.0,
+                          height: 100.0,
+                          point: LatLng(currentLocation.latitude!,
+                              currentLocation.longitude!),
+                          builder: ((context) => const Icon(
+                                Icons.location_on,
+                                color: Colors.red,
+                              )),
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ],
             ),
-            body: Container(
-              padding: const EdgeInsets.all(15.0),
-              child: GridView.count(
-                // crossAxisSpacing: 5,
-                mainAxisSpacing: 2,
-                crossAxisCount: 2,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Container(
-                      decoration: containerDecoration,
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton.icon(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/profile');
-                          },
-                          icon: const Icon(Icons.person),
-                          label: const Text('الملف الشخصي')),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Container(
-                      decoration: containerDecoration,
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton.icon(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/trips');
-                          },
-                          icon: const Icon(Icons.local_taxi),
-                          label: const Text('الحجوزات')),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           );
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
   }
 }
 

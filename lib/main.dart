@@ -1,5 +1,7 @@
+import 'package:awsilny_driver/screens/home/orders/singleOrder.dart';
 import 'package:awsilny_driver/screens/home/profile.dart';
 import 'package:awsilny_driver/screens/home/orders/orders.dart';
+import 'package:awsilny_driver/shared/colors.dart';
 import 'package:awsilny_driver/shared/showSignIn.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,16 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
+        theme: ThemeData(
+  
+          splashColor: Colors.transparent,
+          
+          highlightColor: Colors.transparent,
+          
+          hoverColor: Colors.transparent,
+          
+        ),
+        color: AppColor.backgroundColor,
         title: 'Awsilny Admin Dashboard',
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
@@ -43,6 +55,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const Wrapper(),
           '/profile': (context) => const ProfilePage(),
           '/trips': (context) => const Orders(),
+          '/single-order': (context) => const SingleOrder(),
         },
         initialRoute: '/',
         // home: Wrapper(),

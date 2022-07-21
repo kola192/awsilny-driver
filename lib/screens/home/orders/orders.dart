@@ -13,12 +13,8 @@ class _OrdersState extends State<Orders> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-              title: const Text('قائمة الحجوزات'),
-              backgroundColor: AppColor.primaryColor,
-            ),
-      body: const OrdersList(),
+    return const Scaffold(
+      body: OrdersList(),
     );
   }
 }
